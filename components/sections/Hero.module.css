@@ -1,0 +1,152 @@
+.hero {
+  position: relative;
+  background: var(--bg);
+  perspective: 2000px;
+  transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  height: 170vh;
+  overflow: visible;
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: clamp(1.5rem, 5vw, 4rem);
+  padding-right: clamp(1.5rem, 5vw, 4rem);
+  padding-bottom: 0;
+  padding-top: clamp(8rem, 15vh, 12rem);
+  pointer-events: none;
+  z-index: 100;
+}
+
+.headline {
+  font-weight: 700;
+  color: #FFF;
+  font-size: clamp(3rem, 8vw, 8rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-align: left;
+  animation: fadeIn 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transform-style: preserve-3d;
+  perspective: 2000px;
+  max-width: 55%;
+  margin-bottom: clamp(2rem, 5vh, 4rem);
+}
+
+.fragmentChar {
+  display: inline-block;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transform:
+    translate3d(
+      calc(var(--random-x) * 1px),
+      calc(var(--random-y) * 1px),
+      calc(var(--random-z) * 1px)
+    )
+    rotate3d(1, 1, 1, calc(var(--random-rotate) * 1deg));
+  color: #FFF;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.25);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.subtitle {
+  position: fixed;
+  bottom: clamp(2rem, 8vh, 6rem);
+  left: clamp(1.5rem, 5vw, 4rem);
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  text-align: left;
+  max-width: 500px;
+  animation: fadeIn 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0.4s both;
+  z-index: 10;
+  transition: opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.scrollIndicator {
+  position: fixed;
+  bottom: clamp(4rem, 12vh, 10rem);
+  left: clamp(1.5rem, 5vw, 4rem);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  animation: fadeIn 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s both;
+  z-index: 10;
+  transition: opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.scrollText {
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  transition: color 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.scrollArrow {
+  font-size: 1.25rem;
+  color: var(--text-tertiary);
+  animation: bounceHorizontal 3s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+  transition: color 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transform: rotate(90deg);
+}
+
+@keyframes bounceHorizontal {
+  0%, 100% {
+    transform: rotate(90deg) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(90deg) translateY(4px);
+    opacity: 0.6;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    perspective: 1000px;
+    height: 170vh;
+  }
+
+  .headline {
+    font-size: clamp(2.5rem, 10vw, 5rem);
+    max-width: 80%;
+    line-height: 1.1;
+  }
+
+  .subtitle {
+    font-size: clamp(0.875rem, 3vw, 1rem);
+    max-width: 90%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fragmentChar {
+    animation: none;
+    transform: none;
+  }
+
+  .scrollArrow {
+    animation: none;
+  }
+}
