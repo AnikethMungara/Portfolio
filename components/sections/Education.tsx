@@ -13,9 +13,9 @@ const education: EducationItem[] = [
     institution: 'Arizona State University',
     period: 'Aug 2023 — May 2027',
     highlights: [
-      'GPA: 3.95/4.0',
-      'Relevant Coursework: Data Structures & Algorithms, Operating Systems, Database Management, Software Engineering, Computer Architecture, Machine Learning, Distributed Systems',
-      'Section Leader for CSE 240 (Programming Languages) and CSE 310 (Data Structures)',
+      'GPA: 4.0/4.0',
+      'Relevant Coursework: Data Structures & Algorithms, Principles of Programming, Principles of Programming Languages, Introduction to Theoretical Computer Science, Operating Systems, Database Management, Software Engineering, Computer Architecture, Machine Learning, Distributed Systems',
+      'Section Leader for Arizona State University',
     ],
   },
 ];

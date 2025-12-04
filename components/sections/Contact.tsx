@@ -28,12 +28,21 @@ export default function Contact() {
             </a>
             <span className={styles.divider}>—</span>
             <a
-              href="https://www.linkedin.com/in/anikethmungara"
+              href="https://www.linkedin.com/in/aniketh-mungara/"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.link}
             >
               LinkedIn
+            </a>
+            <span className={styles.divider}>—</span>
+            <a
+              href="https://www.instagram.com/aka_kat/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.link}
+            >
+              Instagram
             </a>
           </div>
         </div>

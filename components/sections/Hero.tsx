@@ -1,143 +1,134 @@
 'use client';
-
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Hero.module.css';
 
-const phrases = [
-  'Solving real problems with code'
-];
-
 export default function Hero() {
-  const [currentPhrase, setCurrentPhrase] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [viewportHeight, setViewportHeight] = useState(1000);
-  const heroRef = useRef<HTMLElement>(null);
 
-  // Phrase cycling effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (scrollProgress < 0.1) {
-        setCurrentPhrase((prev) => (prev + 1) % phrases.length);
-      }
-    }, 5000);
+  const line1 = 'Solving real problems';
+  const line2 = 'with code';
+  const text = `${line1}\n${line2}`;
+  const letters = text.split('');
 
-    return () => clearInterval(interval);
-  }, [scrollProgress]);
-
-  // Set viewport height on mount
-  useEffect(() => {
-    setViewportHeight(window.innerHeight);
-  }, []);
-
-  // Track scroll progress
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
-
-      // Progress from 0 to 1 over 170vh of scrolling
       const totalScrollRange = windowHeight * 1.7;
       const progress = Math.min(Math.max(scrollY / totalScrollRange, 0), 1);
-
       setScrollProgress(progress);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const renderText = () => {
-    const text = phrases[currentPhrase];
-    const chars = text.split('');
+  // Generate ghost letters gradually
+  const generateGhostLetters = () => {
+    const ghosts = [];
+    const mainLetters = letters.filter(c => c !== '\n' && c !== ' ');
 
-    // Generate ghost letters for thicker explosion
-    const ghostLetters: string[] = [];
-    const letters = chars.filter(c => c !== ' ');
-
-    // Add 30+ ghost letters (duplicates + random)
-    for (let i = 0; i < 30; i++) {
-      if (letters.length > 0) {
-        ghostLetters.push(letters[i % letters.length]);
+    // Gradually add ghost letters based on scroll progress (0-20 letters)
+    const ghostCount = Math.floor(scrollProgress * 20 );
+    for (let i = 0; i < ghostCount; i++) {
+      if (mainLetters.length > 0) {
+        ghosts.push({
+          char: mainLetters[i % mainLetters.length],
+          index: i,
+        });
       }
     }
-
-    // Add a few random filler letters
-    const fillers = ['a', 'e', 'i', 'o', 'n', 't', 's', 'r'];
-    for (let i = 0; i < 10; i++) {
-      ghostLetters.push(fillers[i % fillers.length]);
-    }
-
-    const allChars = [...chars, ...ghostLetters];
-
-    return allChars.map((char, index) => {
-      // Generate consistent random values per character
-      const seed1 = ((index * 12345) % 1000) / 1000;
-      const seed2 = ((index * 67890) % 1000) / 1000;
-      const seed3 = ((index * 54321) % 1000) / 1000;
-      const seed4 = ((index * 98765) % 1000) / 1000;
-
-      const isGhost = index >= chars.length;
-
-      // Large random offsets
-      const randomX = seed1 * 600 - 300; // -300 to +300
-      const randomY = seed2 * 600 - 200; // -200 to +400
-      const randomZ = seed3 * 300 - 150; // -150 to +150
-      const randomRotate = seed4 * 160 - 80; // -80 to +80
-
-      // Ghost letters appear near the transition point (80-100% of scroll)
-      const ghostAppearProgress = isGhost ? Math.max(0, (scrollProgress - 0.8) / 0.2) : 1;
-
-      // Ghost letters start from bottom edge of viewport
-      const initialY = isGhost ? viewportHeight * 0.5 : 0;
-
-      return (
-        <span
-          key={`${currentPhrase}-${index}`}
-          className={styles.fragmentChar}
-          style={{
-            '--scroll-progress': scrollProgress,
-            '--random-x': randomX * scrollProgress,
-            '--random-y': (randomY * scrollProgress) - (initialY * (1 - ghostAppearProgress)),
-            '--random-z': randomZ * scrollProgress,
-            '--random-rotate': randomRotate * scrollProgress,
-            opacity: isGhost ? ghostAppearProgress * 0.8 : 1 - scrollProgress * 0.3,
-          } as React.CSSProperties}
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </span>
-      );
-    });
+    return ghosts;
   };
 
+  const ghostLetters = generateGhostLetters();
+
   return (
-    <section
-      ref={heroRef}
-      className={styles.hero}
-      aria-label="Hero section"
-    >
-      <div className={styles.content}>
-        <h1 className={styles.headline}>
-          {renderText()}
-        </h1>
-      </div>
-      <p
-        className={styles.subtitle}
-        style={{
-          opacity: 1 - (scrollProgress * 1.5),
-        }}
-      >
-        Full Stack Developer & Creative Problem Solver
-      </p>
+    <section className={styles.hero}>
+      {/* Text explosion layer - fixed to viewport */}
       <div
-        className={styles.scrollIndicator}
+        className={styles.textOverlay}
         style={{
-          opacity: 1 - (scrollProgress * 1.5),
+          opacity: scrollProgress >= 1 ? 0 : 1,
+          visibility: scrollProgress >= 1 ? 'hidden' : 'visible',
+          pointerEvents: 'none',
         }}
       >
-        <span className={styles.scrollText}>Scroll to explore</span>
-        <span className={styles.scrollArrow}>↓</span>
+        <div className={styles.headline}>
+          {letters.map((letter, index) => {
+            if (letter === '\n') {
+              return <br key={`br-${index}`} />;
+            }
+
+            const seed1 = ((index * 12345) % 1000) / 1000;
+            const seed2 = ((index * 67890) % 1000) / 1000;
+            const seed3 = ((index * 54321) % 1000) / 1000;
+            const seed4 = ((index * 98765) % 1000) / 1000;
+
+            // Much wider spread - entire viewport and beyond
+            const randomX = seed1 * 2400 - 1200;
+            const randomY = seed2 * 1600 - 800;
+            const randomRotate = seed3 * 720 - 360;
+            const randomScale = 0.2 + seed4 * 0.8;
+
+            const translateX = randomX * scrollProgress;
+            const translateY = randomY * scrollProgress;
+            const rotate = randomRotate * scrollProgress;
+            const scale = 1 - (1 - randomScale) * scrollProgress;
+            const opacity = 1; // Keep letters visible throughout
+
+            return (
+              <span
+                key={`main-${index}`}
+                className={styles.letter}
+                style={{
+                  transform: `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotate}deg) scale(${scale})`,
+                  opacity,
+                }}
+              >
+                {letter}
+              </span>
+            );
+          })}
+
+          {/* Ghost letters that appear gradually during scroll */}
+          {ghostLetters.map((ghost) => {
+            const seed1 = ((ghost.index * 54321 + 1000) % 1000) / 1000;
+            const seed2 = ((ghost.index * 98765 + 2000) % 1000) / 1000;
+            const seed3 = ((ghost.index * 13579 + 3000) % 1000) / 1000;
+            const seed4 = ((ghost.index * 24680 + 4000) % 1000) / 1000;
+
+            const randomX = seed1 * 3000 - 1500;
+            const randomY = seed2 * 1200 - 600;
+            const randomRotate = seed3 * 900 - 450;
+            const randomScale = 0.3 + seed4 * 0.7;
+
+            // Ghost letters follow same progression as main letters
+            const translateX = randomX * scrollProgress;
+            const translateY = randomY * scrollProgress;
+            const rotate = randomRotate * scrollProgress;
+            const scale = 1 - (1 - randomScale) * scrollProgress;
+
+            return (
+              <span
+                key={`ghost-${ghost.index}`}
+                className={styles.letter}
+                style={{
+                  transform: `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotate}deg) scale(${scale})`,
+                  opacity: 1,
+                }}
+              >
+                {ghost.char}
+              </span>
+            );
+          })}
+        </div>
+
+        {/* Subtitle below the explosion */}
+        <div className={styles.subtitleContainer}>
+          <p className={styles.subtitle}>Full Stack Developer</p>
+          <p className={styles.subtitle}>AI/ML Engineer</p>
+        </div>
       </div>
     </section>
   );
