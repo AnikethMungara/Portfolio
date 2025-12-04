@@ -72,7 +72,7 @@ export default function Projects() {
     <section className={styles.projects} id="projects">
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2>Selected Work</h2>
+          <h2>Projects</h2>
           <p className={styles.intro}>
             A collection of projects that solve real problems with clean, efficient code.
           </p>

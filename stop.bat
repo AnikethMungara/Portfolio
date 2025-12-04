@@ -1,47 +1,19 @@
 @echo off
-REM Kill all Node.js and Next.js related background processes
-REM This script will terminate all node processes running on your system
-
-echo ================================================
-echo Killing Node.js Background Processes
-echo ================================================
+echo Stopping Next.js development server...
 echo.
 
-REM Kill all node.exe processes
-taskkill /F /IM node.exe /T 2>nul
-if %errorlevel% equ 0 (
-    echo [SUCCESS] Node.js processes terminated
-) else (
-    echo [INFO] No Node.js processes found running
+REM Find and kill processes running on port 3000
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr :3000 ^| findstr LISTENING') do (
+    echo Killing process %%a on port 3000...
+    taskkill /F /PID %%a
 )
 
-echo.
-
-REM Kill processes on common development ports (3000, 3001, 5000, 8080)
-echo Checking for processes on common development ports...
-
-for /f "tokens=5" %%a in ('netstat -aon ^| find ":3000" ^| find "LISTENING"') do (
-    echo Killing process on port 3000 (PID: %%a)
-    taskkill /F /PID %%a 2>nul
-)
-
-for /f "tokens=5" %%a in ('netstat -aon ^| find ":3001" ^| find "LISTENING"') do (
-    echo Killing process on port 3001 (PID: %%a)
-    taskkill /F /PID %%a 2>nul
-)
-
-for /f "tokens=5" %%a in ('netstat -aon ^| find ":5000" ^| find "LISTENING"') do (
-    echo Killing process on port 5000 (PID: %%a)
-    taskkill /F /PID %%a 2>nul
-)
-
-for /f "tokens=5" %%a in ('netstat -aon ^| find ":8080" ^| find "LISTENING"') do (
-    echo Killing process on port 8080 (PID: %%a)
+REM Also kill any node processes running Next.js
+for /f "tokens=2" %%a in ('tasklist ^| findstr node.exe') do (
+    echo Checking node process %%a...
     taskkill /F /PID %%a 2>nul
 )
 
 echo.
-echo ================================================
-echo Process cleanup complete!
-echo ================================================
+echo Server stopped!
 pause

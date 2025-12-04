@@ -8,14 +8,7 @@ export default function About() {
           <h2>About Me</h2>
           <div className={styles.text}>
             <p>
-              I'm a software engineer who believes great code should solve real problems—cleanly, efficiently,
-              and without unnecessary complexity. I build systems that scale, from distributed collaborative
-              platforms to ML-powered developer tools.
-            </p>
-            <p>
-              Currently studying Computer Science at Arizona State University while working in IT support and
-              building projects that push the boundaries of real-time collaboration, AI-assisted coding, and
-              data engineering.
+              Hi, I'm Aniketh Mungara. I study Computer Science with minors in Business and Data Science, but more importantly, I love creating things that feel intuitive, clean, and meaningful. I'm drawn to projects where logic meets design—where a good idea becomes something real through code, iteration, and creativity. Whether I'm building tools, analyzing data, or experimenting with new technologies, I'm always looking for ways to grow and push my work a little further. This portfolio is a small snapshot of that journey.
             </p>
           </div>
         </div>
