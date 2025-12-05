@@ -7,6 +7,27 @@
   align-items: flex-end;
   overflow: hidden;
   --floor-progress: 0; /* Animated by GSAP */
+  --spotlight-x: 10%;
+  --spotlight-y: 40%;
+}
+
+/* Soft animated spotlight behind the text */
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 1600px;
+  height: 1600px;
+  top: var(--spotlight-y, 40%);
+  left: var(--spotlight-x, 10%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.10),
+    rgba(0, 0, 0, 0) 55%
+  );
+  filter: blur(150px);
+  z-index: 1;
 }
 
 /* Rising floor illusion: black panel that moves up */

@@ -12,6 +12,30 @@ export default function Hero() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const footerRef = useRef<HTMLDivElement | null>(null);
 
+  // Animate spotlight effect
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const hero = containerRef.current;
+    let frame = 0;
+
+    function animateSpotlight() {
+      frame += 0.003;
+
+      const x = 10 + Math.sin(frame) * 3;   // slight drift
+      const y = 40 + Math.cos(frame * 0.7) * 2;
+
+      hero.style.setProperty('--spotlight-x', `${x}%`);
+      hero.style.setProperty('--spotlight-y', `${y}%`);
+
+      requestAnimationFrame(animateSpotlight);
+    }
+
+    const rafId = requestAnimationFrame(animateSpotlight);
+
+    return () => cancelAnimationFrame(rafId);
+  }, []);
+
   useEffect(() => {
     if (!containerRef.current) return;
 
