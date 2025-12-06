@@ -136,6 +136,8 @@ export default function Hero() {
 
   return (
     <section ref={containerRef} className={styles.hero}>
+      <div className={styles.backGlow}></div>
+
       <div className={styles.textOverlay}>
         <div className={styles.headline}>{renderHeadline()}</div>
 

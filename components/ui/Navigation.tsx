@@ -28,7 +28,7 @@ export default function Navigation() {
     <nav className={`${styles.nav} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
         <a href="#" className={styles.logo}>
-          Portfolio
+          Aniketh Mungara
         </a>
         <ul className={styles.menu}>
           {navItems.map((item, index) => (

@@ -35,11 +35,19 @@ const experiences: ExperienceItem[] = [
     company: 'Arizona State University',
     role: 'Section Leader',
     period: 'Aug 2024 — Dec 2024',
-    description: 'Led weekly programming lab sessions and provided academic support for CSE courses.',
+    description: 'Facilitated interactive sessions to support and guide students while fostering a collaborative and engaging environment.',
     achievements: [
-      'Led weekly programming lab sessions for 30 students in CSE 240 (C/Java/Prolog) and CSE 310 (Data Structures)',
-      'Hosted biweekly office hours for debugging and conceptual guidance, improving section average by 12%',
-      'Graded assignments and exams, providing constructive feedback on code quality and algorithm design',
+      'Facilitated interactive sessions to support and guide students while fostering a collaborative and engaging environment, both online and in-person',
+      'Designed and shared relevant materials through digital platforms, ensuring clear communication and alignment with the needs of a diverse audience',
+    ],
+  },
+  {
+    company: 'Economic Tech Research',
+    role: 'Independent Researcher',
+    period: '2022',
+    description: 'Conducted economic research analyzing blockchain technologies and their impact on global financial markets.',
+    achievements: [
+      'Authored "Ethereum and The Future," an economic research study analyzing how blockchain technologies and Ethereum\'s ecosystem could reshape global financial markets through macroeconomic trends',
     ],
   },
   {
