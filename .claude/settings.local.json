@@ -12,7 +12,10 @@
       "Bash(cat:*)",
       "Bash(echo:*)",
       "Bash(npm run dev:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(git restore:*)",
+      "Bash(rm:*)",
+      "Bash(git clean:*)"
     ],
     "deny": [],
     "ask": []
