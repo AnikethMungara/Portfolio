@@ -1,7 +1,6 @@
 'use client';
-import GitHubCalendar from 'react-github-calendar';
+import { GitHubCalendar } from 'react-github-calendar';
 import styles from './GitHubActivity.module.css';
-
 export default function GitHubActivity() {
   return (
     <section className={styles.github} id="github">
