@@ -16,7 +16,9 @@
       "Bash(git restore:*)",
       "Bash(rm:*)",
       "Bash(git clean:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(./stop.bat)",
+      "Bash(taskkill:*)"
     ],
     "deny": [],
     "ask": []
