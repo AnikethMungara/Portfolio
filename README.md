@@ -2,6 +2,7 @@
 
 A minimalist, Apple-inspired portfolio website built with Next.js and pure CSS.
 
+
 ## Features
 
 - **Apple-inspired minimalist design** with strict black and white palette
@@ -31,10 +32,10 @@ A minimalist, Apple-inspired portfolio website built with Next.js and pure CSS.
 
 ```bash
 # Install dependencies
-npm install
+npm install 
 
 # Run development server
-npm run dev
+npm run dev or just type run
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -48,60 +49,6 @@ npm run build
 # Start production server
 npm start
 ```
-
-## Deployment to Vercel
-
-### Option 1: Deploy via Vercel CLI
-
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-```
-
-### Option 2: Deploy via Vercel Dashboard
-
-1. Push your code to GitHub
-2. Go to [vercel.com](https://vercel.com)
-3. Click "Import Project"
-4. Select your repository
-5. Click "Deploy"
-
-Vercel will automatically detect Next.js and configure everything.
-
-## Customization
-
-### Update Personal Information
-
-Edit the following files to customize content:
-
-- **Hero section**: `components/sections/Hero.tsx` (phrases array)
-- **Projects**: `components/sections/Projects.tsx` (projects array)
-- **Experience**: `components/sections/Experience.tsx` (experiences array)
-- **Education**: `components/sections/Education.tsx` (education array)
-- **Skills**: `components/sections/Skills.tsx` (skillCategories array)
-- **About**: `components/sections/About.tsx` (paragraph text)
-- **Contact**: `components/sections/Contact.tsx` (email and social links)
-
-### Color Palette
-
-All colors are defined in `styles/globals.css`:
-
-```css
---bg: #FFFFFF
---text: #000000
---grey-dark: #111111
---grey-medium: #333333
---grey-light: #777777
---grey-lighter: #DDDDDD
---grey-lightest: #F3F3F3
-```
-
-### Typography
-
-Fluid typography uses `clamp()` for responsive scaling. Adjust values in `styles/globals.css`.
 
 ## Project Structure
 
