@@ -50,6 +50,8 @@ npm run build
 npm start
 ```
 
+
+
 ## Project Structure
 
 ```
@@ -73,6 +75,8 @@ portfolio/
 ├── vercel.json            # Vercel configuration
 └── package.json
 ```
+
+
 
 ## Performance Features
 
