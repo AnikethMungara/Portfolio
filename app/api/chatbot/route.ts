@@ -54,9 +54,47 @@ Guidelines:
       ? response.content[0].text
       : '';
 
+    // Generate smart follow-up questions
+    const followUpResponse = await anthropic.messages.create({
+      model: 'claude-3-5-haiku-20241022', // Using faster model for follow-ups
+      max_tokens: 200,
+      system: `You are generating follow-up questions for a portfolio chatbot about Aniketh Mungara.
+
+Based on the conversation context, suggest 3 relevant follow-up questions that the user might want to ask next.
+
+Rules:
+- Questions should be natural and conversational
+- They should explore related topics or dive deeper
+- Keep each question concise (under 15 words)
+- Return ONLY the questions, one per line, without numbers or bullets
+- Make them specific and actionable`,
+      messages: [
+        ...messages,
+        {
+          role: 'assistant',
+          content: assistantMessage,
+        },
+        {
+          role: 'user',
+          content: 'Based on our conversation, what are 3 relevant follow-up questions I might want to ask?',
+        },
+      ],
+    });
+
+    const followUpText = followUpResponse.content[0].type === 'text'
+      ? followUpResponse.content[0].text
+      : '';
+
+    const followUpQuestions = followUpText
+      .split('\n')
+      .map(q => q.trim())
+      .filter(q => q.length > 0 && !q.match(/^\d+\./)) // Remove numbering if present
+      .slice(0, 3); // Ensure max 3 questions
+
     return NextResponse.json({
       message: assistantMessage,
       conversationId: response.id,
+      followUpQuestions,
     });
   } catch (error: any) {
     console.error('Chatbot API Error:', error);

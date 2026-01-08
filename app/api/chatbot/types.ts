@@ -11,6 +11,7 @@ export interface ChatbotRequest {
 export interface ChatbotResponse {
   message: string;
   conversationId: string;
+  followUpQuestions: string[];
 }
 
 export interface ChatbotError {

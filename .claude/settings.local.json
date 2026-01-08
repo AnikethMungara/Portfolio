@@ -19,7 +19,8 @@
       "Bash(mkdir:*)",
       "Bash(./stop.bat)",
       "Bash(taskkill:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(tree:*)"
     ],
     "deny": [],
     "ask": []
