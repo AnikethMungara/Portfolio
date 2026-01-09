@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
+import Chatbot from "@/components/ui/Chatbot";
 
 export const metadata: Metadata = {
   title: "Portfolio - Full Stack Developer",
@@ -15,6 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
+        <Chatbot />
       </body>
     </html>
   );
