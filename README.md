@@ -11,11 +11,12 @@ A minimalist, Apple-inspired portfolio website built with Next.js and pure CSS.
   - Scroll-triggered 3D letter explosion effect
 - **AI-Powered Chatbot** with smart follow-up questions
 - **Resume Download** - Generate and download professional PDF resume
-- **Fully responsive** design
-- **Accessible** with semantic HTML
-- **Production-ready** for Vercel deployment
+- **Fully responsive** design 
+- **Accessible** with semantic HTML 
+- **Production-ready** for Vercel deployment 
 
-## Tech Stack
+
+## Tech Stac
 
 - **Framework**: Next.js 16
 - **Styling**: CSS Modules (pure CSS, no preprocessors)
