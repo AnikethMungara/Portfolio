@@ -16,6 +16,9 @@ A minimalist, Apple-inspired portfolio website built with Next.js and pure CSS.
 - **Production-ready** for Vercel deployment 
 
 
+
+
+
 ## Tech Stac
 
 - **Framework**: Next.js 16
